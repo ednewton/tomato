@@ -13,13 +13,12 @@ public class Presenter {
         this.model = model;
     }
 
-    public void login(String pass) {
-        String result = "Incorrect password";
+    public void startTimer() {
+        view.setTime(25 * 60 * 1000);
+    }
 
-        if (model.getPassword().equals(pass)) {
-            result = "Correct password";
-        }
-        view.updateStatusLabel(result);
+    public void timerExpired() {
+        view.setMessage("Time Expired!");
     }
 }
 
