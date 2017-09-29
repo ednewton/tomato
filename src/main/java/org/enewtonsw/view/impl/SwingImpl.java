@@ -22,13 +22,25 @@ public class SwingImpl implements View {
     }
 
     private void createUI() {
-        JButton loginButton = new JButton("Start");
-        loginButton.addActionListener((ActionEvent e) -> {
+        JButton startWorkButton = new JButton("Work");
+        startWorkButton.addActionListener((ActionEvent e) -> {
             presenter.startTimer();
         });
 
+        JButton shortBreakButton = new JButton("Short");
+        shortBreakButton.addActionListener((ActionEvent e) -> {
+            presenter.takeAShortBreak();
+        });
+
+        JButton longBreakButton = new JButton("Long");
+        longBreakButton.addActionListener((ActionEvent e) -> {
+            presenter.takeALongBreak();
+        });
+
         JPanel panel = new JPanel(new GridLayout(3,1));
-        panel.add(loginButton);
+        panel.add(startWorkButton);
+        panel.add(shortBreakButton);
+        panel.add(longBreakButton);
         statusLabel = new JLabel("Status");
         panel.add(statusLabel);
         timerDisplay = new JLabel("00:00");
@@ -50,6 +62,11 @@ public class SwingImpl implements View {
 
     @Override
     public void setTime(long time) {
+        if (timer != null) {
+            timer.stop();
+            timer = null;
+        }
+
         timeLeft = time;
 
         DateFormat sdf = new SimpleDateFormat("mm:ss");
