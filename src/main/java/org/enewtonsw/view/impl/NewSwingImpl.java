@@ -99,7 +99,7 @@ public class NewSwingImpl implements View {
 
     @Override
     public void setMessage(String message) {
-
+        statusMessage.setText(message);
     }
 
     @Override
