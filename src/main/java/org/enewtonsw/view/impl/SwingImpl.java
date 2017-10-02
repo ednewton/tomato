@@ -1,16 +1,12 @@
 package org.enewtonsw.view.impl;
 
-import org.enewtonsw.App;
 import org.enewtonsw.presenter.Presenter;
 import org.enewtonsw.view.View;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,9 +17,15 @@ public class SwingImpl implements View {
     private Timer timer;
     private JLabel timerDisplay;
     private JLabel statusLabel;
+    private JLabel shortBreakCountLabel;
 
     public SwingImpl() {
         createUI();
+    }
+
+    public static Image getImage(final String pathAndFileName) {
+        final URL url = Thread.currentThread().getContextClassLoader().getResource(pathAndFileName);
+        return Toolkit.getDefaultToolkit().getImage(url);
     }
 
     private void createUI() {
@@ -37,8 +39,8 @@ public class SwingImpl implements View {
             presenter.takeAShortBreak();
         });
 
-        ImageIcon shortBreakCountImage = new ImageIcon(getImage("image/sbc0.png"), "Short Break Count");
-        JLabel shortBreakCountLabel = new JLabel(shortBreakCountImage);
+        ImageIcon shortBreakCountImage = getShortBreakIndicatorImage(0);
+        shortBreakCountLabel = new JLabel(shortBreakCountImage);
 
         JButton longBreakButton = new JButton("Long");
         longBreakButton.addActionListener((ActionEvent e) -> {
@@ -53,7 +55,11 @@ public class SwingImpl implements View {
         buttonPanel.setLayout(new GridLayout(0, 1));
         buttonPanel.add(startWorkButton);
         buttonPanel.add(shortBreakButton);
-        buttonPanel.add(shortBreakCountLabel);
+
+        JPanel shortBreakCountPanel = new JPanel();
+        shortBreakCountPanel.setLayout(new BorderLayout());
+        shortBreakCountPanel.add(shortBreakCountLabel, BorderLayout.CENTER);
+        buttonPanel.add(shortBreakCountPanel);
         buttonPanel.add(longBreakButton);
         statusLabel = new JLabel("Status");
         buttonPanel.add(statusLabel);
@@ -67,11 +73,6 @@ public class SwingImpl implements View {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-    }
-
-    public static Image getImage(final String pathAndFileName) {
-        final URL url = Thread.currentThread().getContextClassLoader().getResource(pathAndFileName);
-        return Toolkit.getDefaultToolkit().getImage(url);
     }
 
     @Override
@@ -114,10 +115,12 @@ public class SwingImpl implements View {
 
     @Override
     public void setShortBreakIndicator(int count) {
-        switch (count) {
-            case 0:
+        shortBreakCountLabel.setIcon(getShortBreakIndicatorImage(count));
+    }
 
-                break;
-        }
+    private ImageIcon getShortBreakIndicatorImage(int i) {
+        return new ImageIcon(getImage("image/sbc" +
+                i +
+                ".png"), "Short Break Count");
     }
 }

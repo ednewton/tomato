@@ -42,9 +42,21 @@ public class PresenterTest {
     }
 
     @Test
-    public void takeAShortBreak() throws Exception {
-        presenter.takeAShortBreak();
+    public void takeShortBreaks() throws Exception {
+        for (int i = 1; i < 5; i++) {
+            presenter.takeAShortBreak();
 
+            assertEquals(i, model.getBreakCount());
+            verify(view).setShortBreakIndicator(i);
+            verify(view).setTime(Presenter.SHORT_BREAK);
+
+            Mockito.reset(view);
+        }
+
+        presenter.takeAShortBreak();
+        assertEquals(0, model.getBreakCount());
+
+        verify(view).setShortBreakIndicator(0);
         verify(view).setTime(Presenter.SHORT_BREAK);
     }
 

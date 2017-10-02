@@ -39,6 +39,14 @@ public class Presenter {
     }
 
     public void takeAShortBreak() {
+        int newBreakCount = model.getBreakCount();
+        if (newBreakCount < 4)
+            newBreakCount = newBreakCount + 1;
+        else
+            newBreakCount = 0;
+
+        model.setBreakCount(newBreakCount);
+        view.setShortBreakIndicator(newBreakCount);
         view.setTime(SHORT_BREAK);
     }
 
