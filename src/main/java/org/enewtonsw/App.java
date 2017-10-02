@@ -3,7 +3,6 @@ package org.enewtonsw;
 import org.enewtonsw.model.Model;
 import org.enewtonsw.presenter.Presenter;
 import org.enewtonsw.view.impl.NewSwingImpl;
-import org.enewtonsw.view.impl.SwingImpl;
 import org.enewtonsw.view.View;
 
 import javax.swing.*;
