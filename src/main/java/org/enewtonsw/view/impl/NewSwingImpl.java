@@ -36,7 +36,6 @@ public class NewSwingImpl implements View {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        frame.setSize(300, 400);
         frame.setResizable(false);
     }
 
