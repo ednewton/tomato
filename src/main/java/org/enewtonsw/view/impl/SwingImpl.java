@@ -73,6 +73,8 @@ public class SwingImpl implements View {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setSize(200, 300);
+        frame.setResizable(false);
     }
 
     @Override
