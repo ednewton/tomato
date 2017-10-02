@@ -45,20 +45,25 @@ public class SwingImpl implements View {
             presenter.takeALongBreak();
         });
 
-        JPanel panel = new JPanel();
-        panel.add(startWorkButton);
-        panel.add(shortBreakButton);
-        panel.add(shortBreakCountLabel);
-        panel.add(longBreakButton);
-        statusLabel = new JLabel("Status");
-        panel.add(statusLabel);
+        JPanel timerPanel = new JPanel();
         timerDisplay = new JLabel("00:00");
-        panel.add(timerDisplay);
+        timerPanel.add(timerDisplay);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(0, 1));
+        buttonPanel.add(startWorkButton);
+        buttonPanel.add(shortBreakButton);
+        buttonPanel.add(shortBreakCountLabel);
+        buttonPanel.add(longBreakButton);
+        statusLabel = new JLabel("Status");
+        buttonPanel.add(statusLabel);
 
         JFrame frame = new JFrame("Passive MVP Swing");
         ((JPanel) frame.getContentPane()).setBackground(Color.white);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        frame.setLayout(new BorderLayout());
+        frame.add(timerPanel, BorderLayout.NORTH);
+        frame.add(buttonPanel, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
