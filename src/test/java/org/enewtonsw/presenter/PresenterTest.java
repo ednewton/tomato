@@ -44,7 +44,7 @@ public class PresenterTest {
 
     @Test
     public void takeShortBreaks() throws Exception {
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < Presenter.MAX_SHORT_BREAKS + 1; i++) {
             presenter.takeAShortBreak();
 
             assertEquals(i, model.getBreakCount());

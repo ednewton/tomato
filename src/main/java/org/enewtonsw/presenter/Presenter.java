@@ -11,6 +11,7 @@ public class Presenter {
     public static final String WORKING_MESSAGE = "Working...";
     public static final String TIME_EXPIRED_MESSAGE = "Time Expired!";
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
+    public static final int MAX_SHORT_BREAKS = 4;
 
     private View view;
     private Model model;
@@ -31,7 +32,7 @@ public class Presenter {
 
     public void takeAShortBreak() {
         int newBreakCount = model.getBreakCount();
-        if (newBreakCount < 4)
+        if (newBreakCount < MAX_SHORT_BREAKS)
             newBreakCount = newBreakCount + 1;
         else
             newBreakCount = 0;
