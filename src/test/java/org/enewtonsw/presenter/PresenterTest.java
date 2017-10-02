@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -72,5 +71,15 @@ public class PresenterTest {
         verify(view).setShortBreakIndicator(0);
         verify(view).setTime(Presenter.LONG_BREAK);
         verify(view).setMessage(Presenter.LONG_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testReset() throws Exception {
+        model.setBreakCount(3);
+        presenter.reset();
+        assertEquals(0, model.getBreakCount());
+
+        verify(view).reset();
+        verify(view).setMessage(Presenter.RESET_MESSAGE);
     }
 }

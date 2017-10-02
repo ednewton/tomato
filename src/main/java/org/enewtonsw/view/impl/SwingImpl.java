@@ -54,6 +54,13 @@ public class SwingImpl implements View {
         ImageIcon shortBreakCountImage = getShortBreakIndicatorImage(0);
         shortBreakCountLabel.setIcon(shortBreakCountImage);
 
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.reset();
+            }
+        });
+
         JFrame frame = new JFrame("Tomato");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -81,6 +88,9 @@ public class SwingImpl implements View {
         DateFormat sdf = new SimpleDateFormat("mm:ss");
         timerLabel.setText(sdf.format(timeLeft));
 
+        if (timeLeft == 0)
+            return;
+
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,6 +99,7 @@ public class SwingImpl implements View {
 
                 if (timeLeft <= 0) {
                     timer.stop();
+                    Toolkit.getDefaultToolkit().beep();
                     presenter.timerExpired();
                 }
             }
@@ -105,6 +116,12 @@ public class SwingImpl implements View {
     @Override
     public void setShortBreakIndicator(int count) {
         shortBreakCountLabel.setIcon(getShortBreakIndicatorImage(count));
+    }
+
+    @Override
+    public void reset() {
+        setTime(0);
+        setShortBreakIndicator(0);
     }
 
     private ImageIcon getShortBreakIndicatorImage(int i) {

@@ -10,4 +10,6 @@ public interface View {
     void setMessage(String message);
 
     void setShortBreakIndicator(int count);
+
+    void reset();
 }

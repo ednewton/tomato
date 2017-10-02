@@ -12,6 +12,7 @@ public class Presenter {
     public static final String TIME_EXPIRED_MESSAGE = "Time Expired!";
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
     public static final int MAX_SHORT_BREAKS = 4;
+    public static final String RESET_MESSAGE = "Reset...";
 
     private View view;
     private Model model;
@@ -48,6 +49,12 @@ public class Presenter {
         view.setShortBreakIndicator(0);
         view.setTime(LONG_BREAK);
         view.setMessage(LONG_BREAK_MESSAGE);
+    }
+
+    public void reset() {
+        model.setBreakCount(0);
+        view.reset();
+        view.setMessage(RESET_MESSAGE);
     }
 }
 
