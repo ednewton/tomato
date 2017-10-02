@@ -19,6 +19,7 @@ public class NewSwingImpl implements View {
     private JButton longBreakButton;
     private JButton resetButton;
     private JLabel shortBreakCountLabel;
+    private JPanel gbPanel;
 
     public NewSwingImpl() {
         workButton.addActionListener(new ActionListener() {
