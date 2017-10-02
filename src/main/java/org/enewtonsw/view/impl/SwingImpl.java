@@ -49,6 +49,7 @@ public class SwingImpl implements View {
 
         JPanel timerPanel = new JPanel();
         timerDisplay = new JLabel("00:00");
+        timerDisplay.setFont(new Font("Serif", Font.BOLD, 36));
         timerPanel.add(timerDisplay);
 
         JPanel buttonPanel = new JPanel();
@@ -64,7 +65,7 @@ public class SwingImpl implements View {
         statusLabel = new JLabel("Status");
         buttonPanel.add(statusLabel);
 
-        JFrame frame = new JFrame("Passive MVP Swing");
+        JFrame frame = new JFrame("Tomato");
         ((JPanel) frame.getContentPane()).setBackground(Color.white);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -73,7 +74,7 @@ public class SwingImpl implements View {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        frame.setSize(200, 300);
+        frame.setSize(300, 400);
         frame.setResizable(false);
     }
 
