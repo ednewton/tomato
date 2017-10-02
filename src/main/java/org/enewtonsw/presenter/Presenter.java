@@ -43,6 +43,8 @@ public class Presenter {
     }
 
     public void takeALongBreak() {
+        model.setBreakCount(0);
+        view.setShortBreakIndicator(0);
         view.setTime(LONG_BREAK);
     }
 }

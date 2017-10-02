@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PresenterTest {
@@ -30,27 +31,31 @@ public class PresenterTest {
     public void startTimer() throws Exception {
         presenter.startTimer();
 
-        Mockito.verify(view).setTime(Presenter.WORK_TIME);
+        verify(view).setTime(Presenter.WORK_TIME);
     }
 
     @Test
     public void timerExpired() throws Exception {
         presenter.timerExpired();
 
-        Mockito.verify(view).setMessage("Time Expired!");
+        verify(view).setMessage("Time Expired!");
     }
 
     @Test
     public void takeAShortBreak() throws Exception {
         presenter.takeAShortBreak();
 
-        Mockito.verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setTime(Presenter.SHORT_BREAK);
     }
 
     @Test
     public void takeALongBreak() throws Exception {
+        model.setBreakCount(3);
+
         presenter.takeALongBreak();
 
-        Mockito.verify(view).setTime(Presenter.LONG_BREAK);
+        assertEquals(0, model.getBreakCount());
+        verify(view).setShortBreakIndicator(0);
+        verify(view).setTime(Presenter.LONG_BREAK);
     }
 }

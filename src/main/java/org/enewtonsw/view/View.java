@@ -8,4 +8,6 @@ public interface View {
     void setTime(long time);
 
     void setMessage(String message);
+
+    void setShortBreakIndicator(int count);
 }
