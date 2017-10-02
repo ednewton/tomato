@@ -37,6 +37,23 @@ public class NewSwingImpl implements View {
             }
         });
 
+        shortBreakButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.takeAShortBreak();
+            }
+        });
+
+        longBreakButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenter.takeALongBreak();
+            }
+        });
+
+        ImageIcon shortBreakCountImage = getShortBreakIndicatorImage(0);
+        shortBreakCountLabel.setIcon(shortBreakCountImage);
+
         JFrame frame = new JFrame("Tomato");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -87,7 +104,7 @@ public class NewSwingImpl implements View {
 
     @Override
     public void setShortBreakIndicator(int count) {
-
+        shortBreakCountLabel.setIcon(getShortBreakIndicatorImage(count));
     }
 
     private ImageIcon getShortBreakIndicatorImage(int i) {
