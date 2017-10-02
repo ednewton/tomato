@@ -7,6 +7,10 @@ public class Presenter {
     public static final int SHORT_BREAK = 5 * 60 * 1000;
     public static final int WORK_TIME = 25 * 60 * 1000;
     public static final int LONG_BREAK = 15 * 60 * 1000;
+    public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
+    public static final String WORKING_MESSAGE = "Working...";
+    public static final String TIME_EXPIRED_MESSAGE = "Time Expired!";
+    public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
 
     private View view;
     private Model model;
@@ -16,26 +20,13 @@ public class Presenter {
         this.model = model;
     }
 
-    public void startTimer() {
+    public void startWork() {
         view.setTime(WORK_TIME);
+        view.setMessage(WORKING_MESSAGE);
     }
 
     public void timerExpired() {
-        view.setMessage("Time Expired!");
-    }
-
-    public void takeABreak() {
-        if (model.getBreakCount() < 4) {
-            view.setTime(SHORT_BREAK);
-            model.setBreakCount(model.getBreakCount() + 1);
-        } else {
-            view.setTime(LONG_BREAK);
-            model.setBreakCount(0);
-        }
-    }
-
-    public int getBreakCount() {
-        return model.getBreakCount();
+        view.setMessage(TIME_EXPIRED_MESSAGE);
     }
 
     public void takeAShortBreak() {
@@ -48,12 +39,14 @@ public class Presenter {
         model.setBreakCount(newBreakCount);
         view.setShortBreakIndicator(newBreakCount);
         view.setTime(SHORT_BREAK);
+        view.setMessage(SHORT_BREAK_MESSAGE);
     }
 
     public void takeALongBreak() {
         model.setBreakCount(0);
         view.setShortBreakIndicator(0);
         view.setTime(LONG_BREAK);
+        view.setMessage(LONG_BREAK_MESSAGE);
     }
 }
 

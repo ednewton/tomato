@@ -28,17 +28,18 @@ public class PresenterTest {
     }
 
     @Test
-    public void startTimer() throws Exception {
-        presenter.startTimer();
+    public void startWork() throws Exception {
+        presenter.startWork();
 
         verify(view).setTime(Presenter.WORK_TIME);
+        verify(view).setMessage(Presenter.WORKING_MESSAGE);
     }
 
     @Test
     public void timerExpired() throws Exception {
         presenter.timerExpired();
 
-        verify(view).setMessage("Time Expired!");
+        verify(view).setMessage(Presenter.TIME_EXPIRED_MESSAGE);
     }
 
     @Test
@@ -49,6 +50,7 @@ public class PresenterTest {
             assertEquals(i, model.getBreakCount());
             verify(view).setShortBreakIndicator(i);
             verify(view).setTime(Presenter.SHORT_BREAK);
+            verify(view).setMessage(Presenter.SHORT_BREAK_MESSAGE);
 
             Mockito.reset(view);
         }
@@ -69,5 +71,6 @@ public class PresenterTest {
         assertEquals(0, model.getBreakCount());
         verify(view).setShortBreakIndicator(0);
         verify(view).setTime(Presenter.LONG_BREAK);
+        verify(view).setMessage(Presenter.LONG_BREAK_MESSAGE);
     }
 }

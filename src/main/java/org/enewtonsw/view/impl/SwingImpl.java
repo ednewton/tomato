@@ -33,7 +33,7 @@ public class SwingImpl implements View {
         workButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenter.startTimer();
+                presenter.startWork();
             }
         });
 
