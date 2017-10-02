@@ -11,7 +11,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class NewSwingImpl implements View {
+public class SwingImpl implements View {
     private Presenter presenter;
     private JPanel mainPanel;
     private JLabel timerLabel;
@@ -29,7 +29,7 @@ public class NewSwingImpl implements View {
     private long timeLeft;
     private Timer timer;
 
-    public NewSwingImpl() {
+    public SwingImpl() {
         workButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
