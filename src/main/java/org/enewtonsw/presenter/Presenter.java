@@ -2,6 +2,10 @@ package org.enewtonsw.presenter;
 
 import org.enewtonsw.model.Model;
 import org.enewtonsw.view.View;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+import java.io.IOException;
 
 public class Presenter {
     public static final int SHORT_BREAK = 5 * 60 * 1000;
@@ -13,7 +17,7 @@ public class Presenter {
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
     public static final int MAX_SHORT_BREAKS = 4;
     public static final String RESET_MESSAGE = "Reset...";
-
+    private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
 
@@ -28,6 +32,17 @@ public class Presenter {
     }
 
     public void timerExpired() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AudioPlayer.player.start(new AudioStream(getClass().getResourceAsStream(AUDIO_FILE)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
         view.setMessage(TIME_EXPIRED_MESSAGE);
     }
 

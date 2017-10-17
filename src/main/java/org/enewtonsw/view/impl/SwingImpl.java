@@ -102,7 +102,6 @@ public class SwingImpl implements View {
 
                 if (timeLeft <= 0) {
                     timer.stop();
-                    Toolkit.getDefaultToolkit().beep();
                     presenter.timerExpired();
                 }
             }
