@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class SwingImpl implements View {
+    private final JFrame frame;
     private Presenter presenter;
     private JPanel mainPanel;
     private JLabel timerLabel;
@@ -63,7 +64,7 @@ public class SwingImpl implements View {
             }
         });
 
-        JFrame frame = new JFrame("Tomato");
+        frame = new JFrame("Tomato");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setContentPane(mainPanel);
@@ -102,7 +103,18 @@ public class SwingImpl implements View {
 
                 if (timeLeft <= 0) {
                     timer.stop();
+
                     presenter.timerExpired();
+
+                    Object[] options = {"Acknowledge", "Snooze for 5 minutes"};
+                    int choice = JOptionPane.showOptionDialog(frame, "What do you want to do, chief?", "Timer Expired!",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    if (choice == 0) {
+                        System.out.println("Acknowledged");
+                    } else
+                        System.out.println("Snoozed");
+
+                    presenter.stopAudioLoop();
                 }
             }
         });
