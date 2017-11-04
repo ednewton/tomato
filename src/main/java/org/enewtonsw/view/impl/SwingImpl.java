@@ -138,6 +138,11 @@ public class SwingImpl implements View {
         setShortBreakIndicator(0);
     }
 
+    @Override
+    public void setVersion(String version) {
+        System.out.println(version);
+    }
+
     private ImageIcon getShortBreakIndicatorImage(int i) {
         return new ImageIcon(getImage("image/sbc" +
                 i +
