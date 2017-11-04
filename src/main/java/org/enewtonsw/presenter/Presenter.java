@@ -10,16 +10,21 @@ import sun.audio.ContinuousAudioDataStream;
 import java.io.IOException;
 
 public class Presenter {
-    public static final int SHORT_BREAK = 5 * 1000;
+    public static final int SHORT_BREAK = 5 * 60 * 1000;
     public static final int WORK_TIME = 25 * 60 * 1000;
     public static final int LONG_BREAK = 15 * 60 * 1000;
+    public static final long SNOOZE = 5 * 60 * 1000;
+
     public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
     public static final String WORKING_MESSAGE = "Working...";
     public static final String TIME_EXPIRED_MESSAGE = "Time Expired!";
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
     public static final int MAX_SHORT_BREAKS = 4;
     public static final String RESET_MESSAGE = "Reset...";
+    public static final String SNOOZE_MESSAGE = "Snoozing...";
+
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
+
     private View view;
     private Model model;
     private ContinuousAudioDataStream loop;
@@ -33,6 +38,7 @@ public class Presenter {
         view.setTime(WORK_TIME);
         view.setMessage(WORKING_MESSAGE);
     }
+
 
     public void timerExpired() {
         new Thread(new Runnable() {
@@ -80,6 +86,11 @@ public class Presenter {
 
     public void stopAudioLoop() {
         AudioPlayer.player.stop(loop);
+    }
+
+    public void snooze() {
+        view.setTime(SNOOZE);
+        view.setMessage(SNOOZE_MESSAGE);
     }
 }
 

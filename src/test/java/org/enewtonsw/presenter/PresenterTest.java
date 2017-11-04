@@ -82,4 +82,11 @@ public class PresenterTest {
         verify(view).reset();
         verify(view).setMessage(Presenter.RESET_MESSAGE);
     }
+
+    @Test
+    public void testSnooze() throws Exception {
+        presenter.snooze();
+        verify(view).setTime(Presenter.SNOOZE);
+        verify(view).setMessage(Presenter.SNOOZE_MESSAGE);
+    }
 }
