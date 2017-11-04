@@ -1,11 +1,24 @@
 package org.enewtonsw.model;
 
+import java.io.IOException;
+import java.util.Properties;
+
 public class Model {
-    private String password;
     private int breakCount;
+    private String version;
 
     public Model() {
-        password = "password"; //just set a default password.
+        Properties properties = new Properties();
+        try {
+            properties.load(this.getClass().getResourceAsStream("/tomato.properties"));
+            version = properties.getProperty("version");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getVersion() {
+        return version;
     }
 
     public int getBreakCount() {
@@ -14,13 +27,5 @@ public class Model {
 
     public void setBreakCount(int breakCount) {
         this.breakCount = breakCount;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String pass) {
-        password = pass;
     }
 }

@@ -29,6 +29,7 @@ public class SwingImpl implements View {
     private JPanel statusPanel;
     private JLabel statusMessage;
     private JPanel statusInnerPanel;
+    private JLabel versionLabel;
     private long timeLeft;
     private Timer timer;
 
@@ -138,6 +139,11 @@ public class SwingImpl implements View {
         setShortBreakIndicator(0);
     }
 
+    @Override
+    public void setVersion(String version) {
+        versionLabel.setText("v" + version);
+    }
+
     private ImageIcon getShortBreakIndicatorImage(int i) {
         return new ImageIcon(getImage("image/sbc" +
                 i +
@@ -195,6 +201,10 @@ public class SwingImpl implements View {
         timerLabel.setText("00:00");
         timerLabel.setVerticalAlignment(0);
         timerPanel.add(timerLabel, BorderLayout.CENTER);
+        versionLabel = new JLabel();
+        versionLabel.setHorizontalAlignment(4);
+        versionLabel.setText("Label");
+        timerPanel.add(versionLabel, BorderLayout.SOUTH);
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         mainPanel.add(buttonPanel, BorderLayout.WEST);
