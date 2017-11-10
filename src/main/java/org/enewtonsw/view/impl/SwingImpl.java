@@ -130,11 +130,12 @@ public class SwingImpl implements View {
 
     @Override
     public void showDialog() {
-        Object[] options = {"Yes, please",
-                "No way!"};
+        Object[] options = {"Acknowledge",
+                "Snooze for 5 minutes"};
+
         int n = JOptionPane.showOptionDialog(frame,
-                "Would you like green eggs and ham?",
-                "A Silly Question",
+                "The timer has expired!",
+                "Timer Expired",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,     //do not use a custom Icon
