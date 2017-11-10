@@ -110,6 +110,8 @@ public class SwingImpl implements View {
                     timer.stop();
                     presenter.timerExpired();
                     showDialog();
+
+                    presenter.stopAudio();
                 }
             }
         });
@@ -146,8 +148,6 @@ public class SwingImpl implements View {
                 null,     //do not use a custom Icon
                 options,  //the titles of buttons
                 options[0]); //default button title
-
-        presenter.stopAudio();
     }
 
     private ImageIcon getShortBreakIndicatorImage(int i) {
