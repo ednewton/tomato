@@ -62,6 +62,14 @@ public class PresenterTest {
     }
 
     @Test
+    public void testSnooze() throws Exception {
+        presenter.snooze();
+
+        verify(view).setTime(Presenter.SNOOZE_TIME);
+        verify(view).setMessage(Presenter.SNOOZING_MESSAGE);
+    }
+
+    @Test
     public void takeALongBreak() throws Exception {
         model.setBreakCount(3);
 
