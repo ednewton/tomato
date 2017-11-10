@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class SwingImpl implements View {
+    private final JFrame frame;
     private Presenter presenter;
     private JPanel mainPanel;
     private JLabel timerLabel;
@@ -63,7 +64,7 @@ public class SwingImpl implements View {
             }
         });
 
-        JFrame frame = new JFrame("Tomato");
+        frame = new JFrame("Tomato");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setContentPane(mainPanel);
@@ -103,6 +104,7 @@ public class SwingImpl implements View {
                 if (timeLeft <= 0) {
                     timer.stop();
                     presenter.timerExpired();
+                    showDialog();
                 }
             }
         });
@@ -124,6 +126,22 @@ public class SwingImpl implements View {
     public void reset() {
         setTime(0);
         setShortBreakIndicator(0);
+    }
+
+    @Override
+    public void showDialog() {
+        Object[] options = {"Yes, please",
+                "No way!"};
+        int n = JOptionPane.showOptionDialog(frame,
+                "Would you like green eggs and ham?",
+                "A Silly Question",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,     //do not use a custom Icon
+                options,  //the titles of buttons
+                options[0]); //default button title
+
+        presenter.stopAudio();
     }
 
     private ImageIcon getShortBreakIndicatorImage(int i) {

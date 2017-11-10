@@ -2,13 +2,15 @@ package org.enewtonsw.presenter;
 
 import org.enewtonsw.model.Model;
 import org.enewtonsw.view.View;
+import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 import java.io.IOException;
 
 public class Presenter {
-    public static final int SHORT_BREAK = 5 * 60 * 1000;
+    public static final int SHORT_BREAK = 5  * 1000;
     public static final int WORK_TIME = 25 * 60 * 1000;
     public static final int LONG_BREAK = 15 * 60 * 1000;
     public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
@@ -20,6 +22,8 @@ public class Presenter {
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
+    private AudioStream audioStream;
+    private ContinuousAudioDataStream loop;
 
     public Presenter(View view, Model model) {
         this.view = view;
@@ -36,7 +40,10 @@ public class Presenter {
             @Override
             public void run() {
                 try {
-                    AudioPlayer.player.start(new AudioStream(getClass().getResourceAsStream(AUDIO_FILE)));
+                    audioStream = new AudioStream(getClass().getResourceAsStream(AUDIO_FILE));
+                    AudioData audioData = audioStream.getData();
+                    loop = new ContinuousAudioDataStream(audioData);
+                    AudioPlayer.player.start(loop);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -70,6 +77,10 @@ public class Presenter {
         model.setBreakCount(0);
         view.reset();
         view.setMessage(RESET_MESSAGE);
+    }
+
+    public void stopAudio() {
+        AudioPlayer.player.stop(loop);
     }
 }
 

@@ -12,4 +12,6 @@ public interface View {
     void setShortBreakIndicator(int count);
 
     void reset();
+
+    void showDialog();
 }
