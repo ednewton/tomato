@@ -29,6 +29,7 @@ public class Presenter {
     public Presenter(View view, Model model) {
         this.view = view;
         this.model = model;
+        this.view.setVersion(model.getVersion());
     }
 
     public void startWork() {

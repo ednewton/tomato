@@ -1,11 +1,18 @@
 package org.enewtonsw.model;
 
 public class Model {
-    private String password;
     private int breakCount;
+    private String version;
 
     public Model() {
-        password = "password"; //just set a default password.
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public int getBreakCount() {
@@ -14,13 +21,5 @@ public class Model {
 
     public void setBreakCount(int breakCount) {
         this.breakCount = breakCount;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String pass) {
-        password = pass;
     }
 }

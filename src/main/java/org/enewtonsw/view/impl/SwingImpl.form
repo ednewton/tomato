@@ -20,6 +20,13 @@
               <verticalAlignment value="0"/>
             </properties>
           </component>
+          <component id="79567" class="javax.swing.JLabel" binding="versionLabel">
+            <constraints border-constraint="South"/>
+            <properties>
+              <horizontalAlignment value="4"/>
+              <text value="Label"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="24293" binding="buttonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

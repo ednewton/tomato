@@ -13,5 +13,5 @@ public interface View {
 
     void reset();
 
-    int showDialog();
+    void setVersion(String version);
 }

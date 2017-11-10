@@ -35,6 +35,7 @@ public class SwingImpl implements View {
     private JPanel statusPanel;
     private JLabel statusMessage;
     private JPanel statusInnerPanel;
+    private JLabel versionLabel;
     private long timeLeft;
     private Timer timer;
 
@@ -109,6 +110,7 @@ public class SwingImpl implements View {
 
                 if (timeLeft <= 0) {
                     timer.stop();
+
                     presenter.timerExpired();
                     int ackOrSnooze = showDialog();
 
@@ -141,7 +143,11 @@ public class SwingImpl implements View {
     }
 
     @Override
-    public int showDialog() {
+    public void setVersion(String version) {
+        versionLabel.setText("v" + version);
+    }
+
+    private int showDialog() {
         Object[] options = {ACK_BUTTON_TEXT,
                 SNOOZE_BUTTON_TEXT};
 
@@ -212,6 +218,10 @@ public class SwingImpl implements View {
         timerLabel.setText("00:00");
         timerLabel.setVerticalAlignment(0);
         timerPanel.add(timerLabel, BorderLayout.CENTER);
+        versionLabel = new JLabel();
+        versionLabel.setHorizontalAlignment(4);
+        versionLabel.setText("Label");
+        timerPanel.add(versionLabel, BorderLayout.SOUTH);
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         mainPanel.add(buttonPanel, BorderLayout.WEST);
