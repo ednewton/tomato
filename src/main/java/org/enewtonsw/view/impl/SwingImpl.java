@@ -136,11 +136,11 @@ public class SwingImpl implements View {
     }
 
     @Override
-    public void showDialog() {
+    public int showDialog() {
         Object[] options = {ACK_BUTTON_TEXT,
                 SNOOZE_BUTTON_TEXT};
 
-        int n = JOptionPane.showOptionDialog(frame,
+        return JOptionPane.showOptionDialog(frame,
                 TIMER_EXPIRED_MESSAGE,
                 TIMER_EXPIRED_TITLE,
                 JOptionPane.YES_NO_OPTION,

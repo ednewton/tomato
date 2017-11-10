@@ -13,5 +13,5 @@ public interface View {
 
     void reset();
 
-    void showDialog();
+    int showDialog();
 }
