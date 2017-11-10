@@ -20,6 +20,8 @@ public class Presenter {
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
     public static final int MAX_SHORT_BREAKS = 4;
     public static final String RESET_MESSAGE = "Reset...";
+    public static final String SNOOZING_MESSAGE = "Snoozing...";
+    public static final String ACK_MESSAGE = "Acknowledged";
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
@@ -73,6 +75,11 @@ public class Presenter {
         view.setShortBreakIndicator(0);
         view.setTime(LONG_BREAK);
         view.setMessage(LONG_BREAK_MESSAGE);
+    }
+
+    public void snooze() {
+        view.setTime(SNOOZE_TIME);
+        view.setMessage(SNOOZING_MESSAGE);
     }
 
     public void reset() {

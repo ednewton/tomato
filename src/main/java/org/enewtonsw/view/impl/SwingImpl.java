@@ -115,8 +115,9 @@ public class SwingImpl implements View {
                     int ackOrSnooze = showDialog();
 
                     if (ackOrSnooze == SNOOZE) {
-                        setTime(Presenter.SNOOZE_TIME);
-                    }
+                        presenter.snooze();
+                    } else
+                        setMessage(Presenter.ACK_MESSAGE);
 
                     presenter.stopAudio();
                 }
