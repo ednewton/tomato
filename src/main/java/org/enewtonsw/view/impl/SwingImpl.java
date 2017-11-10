@@ -19,6 +19,7 @@ public class SwingImpl implements View {
     public static final String ACK_BUTTON_TEXT = "Acknowledge";
     public static final String SNOOZE_BUTTON_TEXT = "Snooze for 5 minutes";
     public static final String SHORT_BREAK_COUNT_IMAGE_DESC = "Short Break Count";
+    public static final int SNOOZE = 1;
     private final JFrame frame;
     private Presenter presenter;
     private JPanel mainPanel;
@@ -109,7 +110,11 @@ public class SwingImpl implements View {
                 if (timeLeft <= 0) {
                     timer.stop();
                     presenter.timerExpired();
-                    showDialog();
+                    int ackOrSnooze = showDialog();
+
+                    if (ackOrSnooze == SNOOZE) {
+                        setTime(Presenter.SNOOZE_TIME);
+                    }
 
                     presenter.stopAudio();
                 }

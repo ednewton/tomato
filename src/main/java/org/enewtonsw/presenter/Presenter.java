@@ -10,7 +10,8 @@ import sun.audio.ContinuousAudioDataStream;
 import java.io.IOException;
 
 public class Presenter {
-    public static final int SHORT_BREAK = 5  * 1000;
+    public static final int SHORT_BREAK = 5 * 1000;
+    public static final int SNOOZE_TIME = 5 * 60 * 1000;
     public static final int WORK_TIME = 25 * 60 * 1000;
     public static final int LONG_BREAK = 15 * 60 * 1000;
     public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
