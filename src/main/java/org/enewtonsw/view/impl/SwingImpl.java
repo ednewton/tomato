@@ -14,6 +14,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class SwingImpl implements View {
+    public static final String TIMER_EXPIRED_MESSAGE = "The timer has expired!";
+    public static final String TIMER_EXPIRED_TITLE = "Timer Expired";
+    public static final String ACK_BUTTON_TEXT = "Acknowledge";
+    public static final String SNOOZE_BUTTON_TEXT = "Snooze for 5 minutes";
+    public static final String SHORT_BREAK_COUNT_IMAGE_DESC = "Short Break Count";
     private final JFrame frame;
     private Presenter presenter;
     private JPanel mainPanel;
@@ -130,12 +135,12 @@ public class SwingImpl implements View {
 
     @Override
     public void showDialog() {
-        Object[] options = {"Acknowledge",
-                "Snooze for 5 minutes"};
+        Object[] options = {ACK_BUTTON_TEXT,
+                SNOOZE_BUTTON_TEXT};
 
         int n = JOptionPane.showOptionDialog(frame,
-                "The timer has expired!",
-                "Timer Expired",
+                TIMER_EXPIRED_MESSAGE,
+                TIMER_EXPIRED_TITLE,
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,     //do not use a custom Icon
@@ -148,7 +153,7 @@ public class SwingImpl implements View {
     private ImageIcon getShortBreakIndicatorImage(int i) {
         return new ImageIcon(getImage("image/sbc" +
                 i +
-                ".png"), "Short Break Count");
+                ".png"), SHORT_BREAK_COUNT_IMAGE_DESC);
     }
 
     private Image getImage(final String pathAndFileName) {
