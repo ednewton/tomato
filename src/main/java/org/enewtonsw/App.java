@@ -23,7 +23,7 @@ public class App {
             Model model = new Model();
             try {
                 Properties properties = new Properties();
-                properties.load(this.getClass().getResourceAsStream("/tomato.properties"));
+                properties.load(this.getClass().getResourceAsStream("/filtered/tomato.properties"));
                 model.setVersion(properties.getProperty("version"));
             } catch (IOException e) {
                 e.printStackTrace();
