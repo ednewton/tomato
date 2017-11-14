@@ -14,4 +14,6 @@ public interface View {
     void reset();
 
     void setVersion(String version);
+
+    long getTime();
 }

@@ -10,11 +10,12 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PresenterTest {
-
     @Mock
     private View view;
     private Presenter presenter;
@@ -96,5 +97,33 @@ public class PresenterTest {
 
         verify(view).reset();
         verify(view).setMessage(Presenter.RESET_MESSAGE);
+    }
+
+    @Test
+    public void testAddMinute() throws Exception {
+        when(view.getTime()).thenReturn(2333L);
+        presenter.addMinute();
+
+        verify(view).setTime(62333L);
+    }
+
+    @Test
+    public void testCannotAddAnotherMinute() throws Exception {
+        when(view.getTime()).thenReturn(Presenter.FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS);
+
+        try {
+            presenter.addMinute();
+            fail();
+        } catch (Exception e) {
+        }
+    }
+
+    @Test
+    public void testUpperLimitAnotherMinute() throws Exception {
+        when(view.getTime()).thenReturn(Presenter.FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS);
+
+        presenter.addMinute();
+
+        verify(view).setTime(Presenter.FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS);
     }
 }

@@ -14,6 +14,10 @@ public class Presenter {
     public static final int SNOOZE_TIME = 5 * 60 * 1000;
     public static final int WORK_TIME = 25 * 60 * 1000;
     public static final int LONG_BREAK = 15 * 60 * 1000;
+
+    public static final long FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS = 60 * 60 * 1000L - 1000L;
+    public static final long FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS = 59 * 60 * 1000L - 1000L;
+
     public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
     public static final String WORKING_MESSAGE = "Working...";
     public static final String TIME_EXPIRED_MESSAGE = "%s Time Expired!";
@@ -23,6 +27,7 @@ public class Presenter {
     public static final String SNOOZING_MESSAGE = "Snoozing...";
     public static final String ACK_MESSAGE = "Acknowledged";
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
+    public static final long SIXTY_SECONDS = 60 * 1000L;
     private View view;
     private Model model;
     private AudioStream audioStream;
@@ -90,6 +95,15 @@ public class Presenter {
 
     public void stopAudio() {
         AudioPlayer.player.stop(loop);
+    }
+
+    public void addMinute() {
+        long timeLeft = view.getTime();
+
+        if (timeLeft > FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS)
+            throw new IllegalStateException();
+
+        view.setTime(SIXTY_SECONDS + timeLeft);
     }
 }
 

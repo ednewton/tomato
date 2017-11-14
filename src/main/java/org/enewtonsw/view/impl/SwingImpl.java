@@ -2,10 +2,12 @@ package org.enewtonsw.view.impl;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import org.enewtonsw.presenter.Presenter;
 import org.enewtonsw.view.View;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +38,10 @@ public class SwingImpl implements View {
     private JLabel statusMessage;
     private JPanel statusInnerPanel;
     private JLabel versionLabel;
+    private JPanel incrDecrMinutePanel;
+    private JPanel incrDecrButtonPanel;
+    private JButton addMinuteButton;
+    private JButton subtractMinuteButton;
     private long timeLeft;
     private Timer timer;
     private String currentState;
@@ -62,6 +68,24 @@ public class SwingImpl implements View {
             public void actionPerformed(ActionEvent e) {
                 currentState = "Long Break";
                 presenter.takeALongBreak();
+            }
+        });
+
+        addMinuteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    presenter.addMinute();
+                } catch (Exception e1) {
+                    // ignore
+                }
+            }
+        });
+
+        subtractMinuteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 
@@ -153,6 +177,11 @@ public class SwingImpl implements View {
         versionLabel.setText("v" + version);
     }
 
+    @Override
+    public long getTime() {
+        return timeLeft;
+    }
+
     private int showDialog() {
         Object[] options = {ACK_BUTTON_TEXT,
                 SNOOZE_BUTTON_TEXT};
@@ -228,6 +257,34 @@ public class SwingImpl implements View {
         versionLabel.setHorizontalAlignment(4);
         versionLabel.setText("Label");
         timerPanel.add(versionLabel, BorderLayout.SOUTH);
+        incrDecrMinutePanel = new JPanel();
+        incrDecrMinutePanel.setLayout(new GridBagLayout());
+        timerPanel.add(incrDecrMinutePanel, BorderLayout.EAST);
+        incrDecrButtonPanel = new JPanel();
+        incrDecrButtonPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        incrDecrMinutePanel.add(incrDecrButtonPanel, gbc);
+        incrDecrButtonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Minute", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$(null, -1, -1, incrDecrButtonPanel.getFont())));
+        addMinuteButton = new JButton();
+        addMinuteButton.setText("+");
+        incrDecrButtonPanel.add(addMinuteButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(1, 1), null, null, 1, false));
+        final Spacer spacer1 = new Spacer();
+        incrDecrButtonPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension(1, -1), null, 1, false));
+        final Spacer spacer2 = new Spacer();
+        incrDecrButtonPanel.add(spacer2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        subtractMinuteButton = new JButton();
+        subtractMinuteButton.setText("-");
+        incrDecrButtonPanel.add(subtractMinuteButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(1, 1), null, null, 1, false));
+        final JPanel spacer3 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        incrDecrMinutePanel.add(spacer3, gbc);
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         mainPanel.add(buttonPanel, BorderLayout.WEST);
@@ -237,7 +294,6 @@ public class SwingImpl implements View {
         buttonPanel.add(gbPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         workButton = new JButton();
         workButton.setText("Work");
-        GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
