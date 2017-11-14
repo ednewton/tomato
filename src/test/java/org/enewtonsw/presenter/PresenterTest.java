@@ -119,11 +119,31 @@ public class PresenterTest {
     }
 
     @Test
-    public void testUpperLimitAnotherMinute() throws Exception {
+    public void testUpperLimitAddMinute() throws Exception {
         when(view.getTime()).thenReturn(Presenter.FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS);
 
         presenter.addMinute();
 
         verify(view).setTime(Presenter.FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS);
+    }
+
+    @Test
+    public void testCannotSubtractAnotherMinute() throws Exception {
+        when(view.getTime()).thenReturn(Presenter.SIXTY_SECONDS - 1000L);
+
+        try {
+            presenter.subtractMinute();
+            fail();
+        } catch (Exception e) {
+        }
+    }
+
+    @Test
+    public void testSubtractMinute() throws Exception {
+        when(view.getTime()).thenReturn(Presenter.SIXTY_SECONDS);
+
+        presenter.subtractMinute();
+
+        verify(view).setTime(0);
     }
 }

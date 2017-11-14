@@ -85,7 +85,11 @@ public class SwingImpl implements View {
         subtractMinuteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    presenter.subtractMinute();
+                } catch (Exception e1) {
+                    // ignore
+                }
             }
         });
 

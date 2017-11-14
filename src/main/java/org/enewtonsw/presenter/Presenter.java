@@ -105,5 +105,14 @@ public class Presenter {
 
         view.setTime(SIXTY_SECONDS + timeLeft);
     }
+
+    public void subtractMinute() {
+        long timeLeft = view.getTime();
+
+        if (timeLeft < SIXTY_SECONDS)
+            throw new IllegalStateException();
+
+        view.setTime(timeLeft - SIXTY_SECONDS);
+    }
 }
 
