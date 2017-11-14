@@ -35,10 +35,17 @@ public class PresenterTest {
     }
 
     @Test
-    public void timerExpired() throws Exception {
-        presenter.timerExpired();
+    public void workTimerExpired() throws Exception {
+        presenter.timerExpired("Work");
 
-        verify(view).setMessage(Presenter.TIME_EXPIRED_MESSAGE);
+        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Work"));
+    }
+
+    @Test
+    public void shortBreakTimerExpired() throws Exception {
+        presenter.timerExpired("Short Break");
+
+        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Short Break"));
     }
 
     @Test

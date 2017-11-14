@@ -16,7 +16,7 @@ public class Presenter {
     public static final int LONG_BREAK = 15 * 60 * 1000;
     public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
     public static final String WORKING_MESSAGE = "Working...";
-    public static final String TIME_EXPIRED_MESSAGE = "Time Expired!";
+    public static final String TIME_EXPIRED_MESSAGE = "%s Time Expired!";
     public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
     public static final int MAX_SHORT_BREAKS = 4;
     public static final String RESET_MESSAGE = "Reset...";
@@ -39,7 +39,7 @@ public class Presenter {
         view.setMessage(WORKING_MESSAGE);
     }
 
-    public void timerExpired() {
+    public void timerExpired(String activity) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +54,7 @@ public class Presenter {
             }
         }).start();
 
-        view.setMessage(TIME_EXPIRED_MESSAGE);
+        view.setMessage(String.format(TIME_EXPIRED_MESSAGE, activity));
     }
 
     public void takeAShortBreak() {
