@@ -275,6 +275,7 @@ public class SwingImpl implements View {
         incrDecrButtonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Minute", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$(null, -1, -1, incrDecrButtonPanel.getFont())));
         addMinuteButton = new JButton();
         addMinuteButton.setText("+");
+        addMinuteButton.setToolTipText("Add a minute to the timer");
         incrDecrButtonPanel.add(addMinuteButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(1, 1), null, null, 1, false));
         final Spacer spacer1 = new Spacer();
         incrDecrButtonPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension(1, -1), null, 1, false));
@@ -282,6 +283,7 @@ public class SwingImpl implements View {
         incrDecrButtonPanel.add(spacer2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         subtractMinuteButton = new JButton();
         subtractMinuteButton.setText("-");
+        subtractMinuteButton.setToolTipText("Subtract a minute from the timer");
         incrDecrButtonPanel.add(subtractMinuteButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(1, 1), null, null, 1, false));
         final JPanel spacer3 = new JPanel();
         gbc = new GridBagConstraints();
@@ -298,6 +300,7 @@ public class SwingImpl implements View {
         buttonPanel.add(gbPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         workButton = new JButton();
         workButton.setText("Work");
+        workButton.setToolTipText("Start a work session");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -305,6 +308,7 @@ public class SwingImpl implements View {
         gbPanel.add(workButton, gbc);
         shortBreakButton = new JButton();
         shortBreakButton.setText("Short Break");
+        shortBreakButton.setToolTipText("Take a short break");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -312,6 +316,7 @@ public class SwingImpl implements View {
         gbPanel.add(shortBreakButton, gbc);
         longBreakButton = new JButton();
         longBreakButton.setText("Long Break");
+        longBreakButton.setToolTipText("Take a long break");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -319,6 +324,7 @@ public class SwingImpl implements View {
         gbPanel.add(longBreakButton, gbc);
         resetButton = new JButton();
         resetButton.setText("Reset");
+        resetButton.setToolTipText("Reset the timer");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -326,6 +332,7 @@ public class SwingImpl implements View {
         gbPanel.add(resetButton, gbc);
         shortBreakCountLabel = new JLabel();
         shortBreakCountLabel.setText("");
+        shortBreakCountLabel.setToolTipText("How many short breaks you've taken");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;

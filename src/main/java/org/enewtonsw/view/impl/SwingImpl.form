@@ -51,6 +51,7 @@
                     </constraints>
                     <properties>
                       <text value="+"/>
+                      <toolTipText value="Add a minute to the timer"/>
                     </properties>
                   </component>
                   <hspacer id="f6dfc">
@@ -73,6 +74,7 @@
                     </constraints>
                     <properties>
                       <text value="-"/>
+                      <toolTipText value="Subtract a minute from the timer"/>
                     </properties>
                   </component>
                 </children>
@@ -107,6 +109,7 @@
                 </constraints>
                 <properties>
                   <text value="Work"/>
+                  <toolTipText value="Start a work session"/>
                 </properties>
               </component>
               <component id="c346c" class="javax.swing.JButton" binding="shortBreakButton">
@@ -116,6 +119,7 @@
                 </constraints>
                 <properties>
                   <text value="Short Break"/>
+                  <toolTipText value="Take a short break"/>
                 </properties>
               </component>
               <component id="787ad" class="javax.swing.JButton" binding="longBreakButton">
@@ -125,6 +129,7 @@
                 </constraints>
                 <properties>
                   <text value="Long Break"/>
+                  <toolTipText value="Take a long break"/>
                 </properties>
               </component>
               <component id="f4c62" class="javax.swing.JButton" binding="resetButton">
@@ -134,6 +139,7 @@
                 </constraints>
                 <properties>
                   <text value="Reset"/>
+                  <toolTipText value="Reset the timer"/>
                 </properties>
               </component>
               <component id="653a7" class="javax.swing.JLabel" binding="shortBreakCountLabel">
@@ -143,6 +149,7 @@
                 </constraints>
                 <properties>
                   <text value=""/>
+                  <toolTipText value="How many short breaks you've taken"/>
                 </properties>
               </component>
             </children>
