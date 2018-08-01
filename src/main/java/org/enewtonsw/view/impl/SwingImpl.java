@@ -106,7 +106,6 @@ public class SwingImpl implements View {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setContentPane(mainPanel);
-        frame.setAlwaysOnTop(true);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
