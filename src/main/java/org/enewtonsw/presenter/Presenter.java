@@ -1,6 +1,7 @@
 package org.enewtonsw.presenter;
 
 import org.enewtonsw.model.Model;
+import org.enewtonsw.model.State;
 import org.enewtonsw.view.View;
 import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
@@ -40,6 +41,7 @@ public class Presenter {
     }
 
     public void startWork() {
+        model.setCurrentState(State.WORKING);
         view.setTime(WORK_TIME);
         view.setMessage(WORKING_MESSAGE);
     }
@@ -59,6 +61,7 @@ public class Presenter {
             }
         }).start();
 
+        model.setCurrentState(State.ALARMING);
         view.setMessage(String.format(TIME_EXPIRED_MESSAGE, activity));
     }
 
@@ -70,12 +73,14 @@ public class Presenter {
             newBreakCount = 0;
 
         model.setBreakCount(newBreakCount);
+        model.setCurrentState(State.BREAKING);
         view.setShortBreakIndicator(newBreakCount);
         view.setTime(SHORT_BREAK);
         view.setMessage(SHORT_BREAK_MESSAGE);
     }
 
     public void takeALongBreak() {
+        model.setCurrentState(State.BREAKING);
         model.setBreakCount(0);
         view.setShortBreakIndicator(0);
         view.setTime(LONG_BREAK);
@@ -83,11 +88,13 @@ public class Presenter {
     }
 
     public void snooze() {
+        model.setCurrentState(State.SNOOZING);
         view.setTime(SNOOZE_TIME);
         view.setMessage(SNOOZING_MESSAGE);
     }
 
     public void reset() {
+        model.setCurrentState(State.IDLE);
         model.setBreakCount(0);
         view.reset();
         view.setMessage(RESET_MESSAGE);

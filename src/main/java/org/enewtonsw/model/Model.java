@@ -3,6 +3,7 @@ package org.enewtonsw.model;
 public class Model {
     private int breakCount;
     private String version;
+    private State currentState;
 
     public Model() {
     }
@@ -21,5 +22,13 @@ public class Model {
 
     public void setBreakCount(int breakCount) {
         this.breakCount = breakCount;
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
     }
 }

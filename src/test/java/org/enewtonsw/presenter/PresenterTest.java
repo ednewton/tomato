@@ -1,6 +1,7 @@
 package org.enewtonsw.presenter;
 
 import org.enewtonsw.model.Model;
+import org.enewtonsw.model.State;
 import org.enewtonsw.view.View;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class PresenterTest {
     @Test
     public void startWork() throws Exception {
         presenter.startWork();
-
+        assertEquals(State.WORKING, model.getCurrentState());
         verify(view).setTime(Presenter.WORK_TIME);
         verify(view).setMessage(Presenter.WORKING_MESSAGE);
     }
@@ -38,21 +39,30 @@ public class PresenterTest {
     @Test
     public void workTimerExpired() throws Exception {
         presenter.timerExpired("Work");
-
+        assertEquals(State.ALARMING, model.getCurrentState());
         verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Work"));
     }
 
     @Test
     public void shortBreakTimerExpired() throws Exception {
         presenter.timerExpired("Short Break");
-
+        assertEquals(State.ALARMING, model.getCurrentState());
         verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Short Break"));
+    }
+
+    @Test
+    public void longBreakTimerExpired() throws Exception {
+        presenter.timerExpired("Long Break");
+        assertEquals(State.ALARMING, model.getCurrentState());
+        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Long Break"));
     }
 
     @Test
     public void takeShortBreaks() throws Exception {
         for (int i = 1; i < Presenter.MAX_SHORT_BREAKS + 1; i++) {
             presenter.takeAShortBreak();
+
+            assertEquals(State.BREAKING, model.getCurrentState());
 
             assertEquals(i, model.getBreakCount());
             verify(view).setShortBreakIndicator(i);
@@ -73,6 +83,7 @@ public class PresenterTest {
     public void testSnooze() throws Exception {
         presenter.snooze();
 
+        assertEquals(State.SNOOZING, model.getCurrentState());
         verify(view).setTime(Presenter.SNOOZE_TIME);
         verify(view).setMessage(Presenter.SNOOZING_MESSAGE);
     }
@@ -82,6 +93,8 @@ public class PresenterTest {
         model.setBreakCount(3);
 
         presenter.takeALongBreak();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
 
         assertEquals(0, model.getBreakCount());
         verify(view).setShortBreakIndicator(0);
@@ -93,6 +106,8 @@ public class PresenterTest {
     public void testReset() throws Exception {
         model.setBreakCount(3);
         presenter.reset();
+
+        assertEquals(State.IDLE, model.getCurrentState());
         assertEquals(0, model.getBreakCount());
 
         verify(view).reset();
