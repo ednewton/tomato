@@ -38,23 +38,26 @@ public class PresenterTest {
 
     @Test
     public void workTimerExpired() throws Exception {
-        presenter.timerExpired("Work");
+        assertTimerExpired(State.WORKING);
+    }
+
+    public void assertTimerExpired(State working) {
+        model.setCurrentState(working);
+
+        presenter.timerExpired();
+
+        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, working));
         assertEquals(State.ALARMING, model.getCurrentState());
-        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Work"));
     }
 
     @Test
     public void shortBreakTimerExpired() throws Exception {
-        presenter.timerExpired("Short Break");
-        assertEquals(State.ALARMING, model.getCurrentState());
-        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Short Break"));
+        assertTimerExpired(State.BREAKING);
     }
 
     @Test
     public void longBreakTimerExpired() throws Exception {
-        presenter.timerExpired("Long Break");
-        assertEquals(State.ALARMING, model.getCurrentState());
-        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, "Long Break"));
+        assertTimerExpired(State.BREAKING);
     }
 
     @Test

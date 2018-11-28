@@ -43,13 +43,11 @@ public class SwingImpl implements View {
     private JButton subtractMinuteButton;
     private long timeLeft;
     private Timer timer;
-    private String currentState;
 
     public SwingImpl() {
         workButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentState = "Work";
                 presenter.startWork();
             }
         });
@@ -57,7 +55,6 @@ public class SwingImpl implements View {
         shortBreakButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentState = "Short Break";
                 presenter.takeAShortBreak();
             }
         });
@@ -65,7 +62,6 @@ public class SwingImpl implements View {
         longBreakButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentState = "Long Break";
                 presenter.takeALongBreak();
             }
         });
@@ -176,11 +172,10 @@ public class SwingImpl implements View {
                 if (timeLeft == 0) {
                     timer.stop();
 
-                    presenter.timerExpired(currentState);
+                    presenter.timerExpired();
                     int ackOrSnooze = showDialog();
 
                     if (ackOrSnooze == SNOOZE) {
-                        currentState = "Snooze";
                         presenter.snooze();
                     } else
                         setMessage(Presenter.ACK_MESSAGE);

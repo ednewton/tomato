@@ -46,7 +46,7 @@ public class Presenter {
         view.setMessage(WORKING_MESSAGE);
     }
 
-    public void timerExpired(String activity) {
+    public void timerExpired() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -61,8 +61,8 @@ public class Presenter {
             }
         }).start();
 
+        view.setMessage(String.format(TIME_EXPIRED_MESSAGE, model.getCurrentState()));
         model.setCurrentState(State.ALARMING);
-        view.setMessage(String.format(TIME_EXPIRED_MESSAGE, activity));
     }
 
     public void takeAShortBreak() {
