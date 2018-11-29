@@ -164,4 +164,85 @@ public class PresenterTest {
 
         verify(view).setTime(0);
     }
+
+    @Test
+    public void testAcknowledgeAfterWorkingTimerExpiredStartFirstShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(0);
+
+        presenter.acknowledge();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
+        assertEquals(1, model.getBreakCount());
+        verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setShortBreakIndicator(1);
+        verify(view).setMessage(Presenter.SHORT_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testAcknowledgeAfterWorkingTimerExpiredStartSecondShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(1);
+
+        presenter.acknowledge();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
+        assertEquals(2, model.getBreakCount());
+        verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setShortBreakIndicator(2);
+        verify(view).setMessage(Presenter.SHORT_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testAcknowledgeAfterWorkingTimerExpiredStartThirdShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(2);
+
+        presenter.acknowledge();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
+        assertEquals(3, model.getBreakCount());
+        verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setShortBreakIndicator(3);
+        verify(view).setMessage(Presenter.SHORT_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testAcknowledgeAfterWorkingTimerExpiredStartFourthShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(3);
+
+        presenter.acknowledge();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
+        assertEquals(4, model.getBreakCount());
+        verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setShortBreakIndicator(4);
+        verify(view).setMessage(Presenter.SHORT_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testAcknowledgeAfterWorkingTimerExpiredStartLongBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(4);
+
+        presenter.acknowledge();
+
+        assertEquals(State.BREAKING, model.getCurrentState());
+        assertEquals(0, model.getBreakCount());
+        verify(view).setTime(Presenter.LONG_BREAK);
+        verify(view).setShortBreakIndicator(0);
+        verify(view).setMessage(Presenter.LONG_BREAK_MESSAGE);
+    }
+
+    @Test
+    public void testAcknowledgeAfterShortBreakTimerExpiredStartWorking() {
+        model.setCurrentState(State.BREAKING);
+
+        presenter.acknowledge();
+
+        assertEquals(State.WORKING, model.getCurrentState());
+        verify(view).setTime(Presenter.WORK_TIME);
+        verify(view).setMessage(Presenter.WORKING_MESSAGE);
+    }
 }

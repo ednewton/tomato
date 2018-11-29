@@ -27,8 +27,8 @@ public class Presenter {
     public static final String RESET_MESSAGE = "Reset...";
     public static final String SNOOZING_MESSAGE = "Snoozing...";
     public static final String ACK_MESSAGE = "Acknowledged";
-    private static final String AUDIO_FILE = "/audio/Ring01.wav";
     public static final long SIXTY_SECONDS = 60 * 1000L;
+    private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
     private AudioStream audioStream;
@@ -66,15 +66,16 @@ public class Presenter {
     }
 
     public void takeAShortBreak() {
-        int newBreakCount = model.getBreakCount();
-        if (newBreakCount < MAX_SHORT_BREAKS)
-            newBreakCount = newBreakCount + 1;
-        else
-            newBreakCount = 0;
+        int breakCount = model.getBreakCount();
+        if (breakCount < MAX_SHORT_BREAKS) {
+            breakCount++;
+        } else {
+            breakCount = 0;
+        }
 
-        model.setBreakCount(newBreakCount);
+        model.setBreakCount(breakCount);
         model.setCurrentState(State.BREAKING);
-        view.setShortBreakIndicator(newBreakCount);
+        view.setShortBreakIndicator(breakCount);
         view.setTime(SHORT_BREAK);
         view.setMessage(SHORT_BREAK_MESSAGE);
     }
@@ -120,6 +121,19 @@ public class Presenter {
             throw new IllegalStateException();
 
         view.setTime(timeLeft - SIXTY_SECONDS);
+    }
+
+    public void acknowledge() {
+        if (model.getCurrentState() == State.WORKING) {
+            int breakCount = model.getBreakCount();
+            if (breakCount < MAX_SHORT_BREAKS) {
+                takeAShortBreak();
+            } else {
+                takeALongBreak();
+            }
+        } else if (model.getCurrentState() == State.BREAKING) {
+            startWork();
+        }
     }
 }
 
