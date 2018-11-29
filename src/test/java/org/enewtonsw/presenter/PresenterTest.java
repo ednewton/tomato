@@ -61,9 +61,9 @@ public class PresenterTest {
     }
 
     @Test
-    public void takeShortBreaks() throws Exception {
+    public void takeBreaks() throws Exception {
         for (int i = 1; i < Presenter.MAX_SHORT_BREAKS + 1; i++) {
-            presenter.takeAShortBreak();
+            presenter.takeABreak();
 
             assertEquals(State.BREAKING, model.getCurrentState());
 
@@ -75,11 +75,11 @@ public class PresenterTest {
             Mockito.reset(view);
         }
 
-        presenter.takeAShortBreak();
+        presenter.takeABreak();
         assertEquals(0, model.getBreakCount());
 
         verify(view).setShortBreakIndicator(0);
-        verify(view).setTime(Presenter.SHORT_BREAK);
+        verify(view).setTime(Presenter.LONG_BREAK);
     }
 
     @Test
@@ -89,20 +89,6 @@ public class PresenterTest {
         assertEquals(State.SNOOZING, model.getCurrentState());
         verify(view).setTime(Presenter.SNOOZE_TIME);
         verify(view).setMessage(Presenter.SNOOZING_MESSAGE);
-    }
-
-    @Test
-    public void takeALongBreak() throws Exception {
-        model.setBreakCount(3);
-
-        presenter.takeALongBreak();
-
-        assertEquals(State.BREAKING, model.getCurrentState());
-
-        assertEquals(0, model.getBreakCount());
-        verify(view).setShortBreakIndicator(0);
-        verify(view).setTime(Presenter.LONG_BREAK);
-        verify(view).setMessage(Presenter.LONG_BREAK_MESSAGE);
     }
 
     @Test
@@ -244,5 +230,12 @@ public class PresenterTest {
         assertEquals(State.WORKING, model.getCurrentState());
         verify(view).setTime(Presenter.WORK_TIME);
         verify(view).setMessage(Presenter.WORKING_MESSAGE);
+    }
+
+    @Test
+    public void testTakeAShortBreak() {
+        model.setBreakCount(0);
+        presenter.takeABreak();
+        assertEquals(1, model.getBreakCount());
     }
 }

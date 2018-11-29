@@ -66,26 +66,31 @@ public class Presenter {
     }
 
     public void takeAShortBreak() {
+        takeABreak();
+    }
+
+    public void takeALongBreak() {
+        takeABreak();
+    }
+
+    public void takeABreak() {
         int breakCount = model.getBreakCount();
+        int breakTime = SHORT_BREAK;
+        String message = SHORT_BREAK_MESSAGE;
+
         if (breakCount < MAX_SHORT_BREAKS) {
             breakCount++;
         } else {
             breakCount = 0;
+            breakTime = LONG_BREAK;
+            message = LONG_BREAK_MESSAGE;
         }
 
+        view.setTime(breakTime);
+        view.setMessage(message);
+        view.setShortBreakIndicator(breakCount);
         model.setBreakCount(breakCount);
         model.setCurrentState(State.BREAKING);
-        view.setShortBreakIndicator(breakCount);
-        view.setTime(SHORT_BREAK);
-        view.setMessage(SHORT_BREAK_MESSAGE);
-    }
-
-    public void takeALongBreak() {
-        model.setCurrentState(State.BREAKING);
-        model.setBreakCount(0);
-        view.setShortBreakIndicator(0);
-        view.setTime(LONG_BREAK);
-        view.setMessage(LONG_BREAK_MESSAGE);
     }
 
     public void snooze() {
