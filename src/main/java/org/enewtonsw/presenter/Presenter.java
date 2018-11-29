@@ -62,7 +62,6 @@ public class Presenter {
         }).start();
 
         view.setMessage(String.format(TIME_EXPIRED_MESSAGE, model.getCurrentState()));
-        model.setCurrentState(State.ALARMING);
     }
 
     public void takeAShortBreak() {

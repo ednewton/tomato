@@ -41,13 +41,13 @@ public class PresenterTest {
         assertTimerExpired(State.WORKING);
     }
 
-    public void assertTimerExpired(State working) {
-        model.setCurrentState(working);
+    public void assertTimerExpired(State state) {
+        model.setCurrentState(state);
 
         presenter.timerExpired();
 
-        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, working));
-        assertEquals(State.ALARMING, model.getCurrentState());
+        verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, state));
+        assertEquals(state, model.getCurrentState());
     }
 
     @Test
