@@ -177,8 +177,10 @@ public class SwingImpl implements View {
 
                     if (ackOrSnooze == SNOOZE) {
                         presenter.snooze();
-                    } else
+                    } else {
                         setMessage(Presenter.ACK_MESSAGE);
+                        presenter.acknowledge();
+                    }
 
                     presenter.stopAudio();
                 }
