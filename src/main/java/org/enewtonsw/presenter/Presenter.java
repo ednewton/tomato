@@ -130,12 +130,7 @@ public class Presenter {
 
     public void acknowledge() {
         if (model.getCurrentState() == State.WORKING) {
-            int breakCount = model.getBreakCount();
-            if (breakCount < MAX_SHORT_BREAKS) {
-                takeAShortBreak();
-            } else {
-                takeALongBreak();
-            }
+            takeABreak();
         } else if (model.getCurrentState() == State.BREAKING) {
             startWork();
         }
