@@ -93,7 +93,6 @@ public class Presenter {
     }
 
     public void snooze() {
-        model.setCurrentState(State.SNOOZING);
         view.setTime(SNOOZE_TIME);
         view.setMessage(SNOOZING_MESSAGE);
     }

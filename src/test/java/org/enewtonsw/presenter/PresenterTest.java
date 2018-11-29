@@ -84,9 +84,10 @@ public class PresenterTest {
 
     @Test
     public void testSnooze() throws Exception {
+        model.setCurrentState(State.WORKING);
         presenter.snooze();
 
-        assertEquals(State.SNOOZING, model.getCurrentState());
+        assertEquals(State.WORKING, model.getCurrentState());
         verify(view).setTime(Presenter.SNOOZE_TIME);
         verify(view).setMessage(Presenter.SNOOZING_MESSAGE);
     }

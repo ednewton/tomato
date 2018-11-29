@@ -5,8 +5,6 @@ import org.enewtonsw.presenter.Presenter;
 public interface View {
     void setPresenter(Presenter pres);
 
-    void setTime(long time);
-
     void setMessage(String message);
 
     void setShortBreakIndicator(int count);
@@ -16,4 +14,6 @@ public interface View {
     void setVersion(String version);
 
     long getTime();
+
+    void setTime(long time);
 }
