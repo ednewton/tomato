@@ -16,4 +16,6 @@ public interface View {
     long getTime();
 
     void setTime(long time);
+
+    void setAcknowledgeButtonText(String text);
 }

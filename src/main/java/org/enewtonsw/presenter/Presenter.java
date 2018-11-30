@@ -62,6 +62,7 @@ public class Presenter {
         }).start();
 
         view.setMessage(String.format(TIME_EXPIRED_MESSAGE, model.getCurrentState()));
+        view.setAcknowledgeButtonText(getNextStateName());
     }
 
     public void takeAShortBreak() {
@@ -132,6 +133,15 @@ public class Presenter {
         } else if (model.getCurrentState() == State.BREAKING) {
             startWork();
         }
+    }
+
+    public String getNextStateName() {
+        if (model.getCurrentState() == State.WORKING) {
+            return model.getBreakCount() < MAX_SHORT_BREAKS ? "Short Break" : "Long Break";
+        } else {
+            return "Work";
+        }
+
     }
 }
 

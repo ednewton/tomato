@@ -46,6 +46,7 @@ public class PresenterTest {
 
         presenter.timerExpired();
 
+        verify(view).setAcknowledgeButtonText(presenter.getNextStateName());
         verify(view).setMessage(String.format(Presenter.TIME_EXPIRED_MESSAGE, state));
         assertEquals(state, model.getCurrentState());
     }
@@ -238,5 +239,58 @@ public class PresenterTest {
         model.setBreakCount(0);
         presenter.takeABreak();
         assertEquals(1, model.getBreakCount());
+    }
+
+    @Test
+    public void testGetNextStateFirstShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(0);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Short Break", name);
+    }
+
+    @Test
+    public void testGetNextStateSecondShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(1);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Short Break", name);
+    }
+
+    @Test
+    public void testGetNextStateThirdShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(2);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Short Break", name);
+    }
+
+    @Test
+    public void testGetNextStateFourthShortBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(3);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Short Break", name);
+    }
+
+    @Test
+    public void testGetNextStateLongBreak() {
+        model.setCurrentState(State.WORKING);
+        model.setBreakCount(4);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Long Break", name);
+    }
+
+    @Test
+    public void testGetNextStateWorking() {
+        model.setCurrentState(State.BREAKING);
+
+        String name = presenter.getNextStateName();
+        assertEquals("Work", name);
     }
 }

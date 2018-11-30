@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 public class SwingImpl implements View {
     public static final String TIMER_EXPIRED_MESSAGE = "The timer has expired!";
     public static final String TIMER_EXPIRED_TITLE = "Timer Expired";
-    public static final String ACK_BUTTON_TEXT = "Acknowledge";
     public static final String SNOOZE_BUTTON_TEXT = "Snooze for 5 minutes";
     public static final String SHORT_BREAK_COUNT_IMAGE_DESC = "Short Break Count";
     public static final int SNOOZE = 1;
@@ -43,6 +42,7 @@ public class SwingImpl implements View {
     private JButton subtractMinuteButton;
     private long timeLeft;
     private Timer timer;
+    private String acknowledgementButtonText;
 
     public SwingImpl() {
         workButton.addActionListener(new ActionListener() {
@@ -190,8 +190,13 @@ public class SwingImpl implements View {
         timer.start();
     }
 
+    @Override
+    public void setAcknowledgeButtonText(String text) {
+        acknowledgementButtonText = text;
+    }
+
     private int showDialog() {
-        Object[] options = {ACK_BUTTON_TEXT,
+        Object[] options = {acknowledgementButtonText,
                 SNOOZE_BUTTON_TEXT};
 
         return JOptionPane.showOptionDialog(frame,
