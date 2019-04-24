@@ -68,6 +68,7 @@ public class Presenter {
     }
 
     public void takeALongBreak() {
+        model.setBreakCount(Presenter.MAX_SHORT_BREAKS);
         takeABreak();
     }
 

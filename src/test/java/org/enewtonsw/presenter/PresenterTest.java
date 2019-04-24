@@ -257,6 +257,15 @@ public class PresenterTest {
     }
 
     @Test
+    public void testTakeALongBreakEarly() {
+        model.setBreakCount(0);
+
+        presenter.takeALongBreak();
+
+        assertEquals(0, model.getBreakCount());
+    }
+
+    @Test
     public void testGetNextStateFirstShortBreak() {
         model.setCurrentState(State.WORKING);
         model.setBreakCount(0);
