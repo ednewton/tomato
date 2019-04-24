@@ -71,7 +71,7 @@ public class Presenter {
         takeABreak();
     }
 
-    public void takeABreak() {
+    void takeABreak() {
         int breakCount = model.getBreakCount();
         int breakTime = SHORT_BREAK;
         String message = SHORT_BREAK_MESSAGE;
@@ -133,7 +133,7 @@ public class Presenter {
         }
     }
 
-    public String getNextStateName() {
+    String getNextStateName() {
         if (model.getCurrentState() == State.WORKING) {
             return model.getBreakCount() < MAX_SHORT_BREAKS ? "Short Break" : "Long Break";
         } else {
