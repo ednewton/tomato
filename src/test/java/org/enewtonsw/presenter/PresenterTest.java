@@ -4,32 +4,35 @@ import org.enewtonsw.model.Model;
 import org.enewtonsw.model.State;
 import org.enewtonsw.view.View;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PresenterTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     @Mock
     private View view;
     private Presenter presenter;
     private Model model;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         model = new Model();
         presenter = new Presenter(view, model);
     }
 
     @Test
-    public void startWork() throws Exception {
+    public void startWork() {
         presenter.startWork();
         assertEquals(State.WORKING, model.getCurrentState());
         verify(view).setTime(Presenter.WORK_TIME);
@@ -37,7 +40,7 @@ public class PresenterTest {
     }
 
     @Test
-    public void workTimerExpired() throws Exception {
+    public void workTimerExpired() {
         assertTimerExpired(State.WORKING);
     }
 
@@ -52,17 +55,17 @@ public class PresenterTest {
     }
 
     @Test
-    public void shortBreakTimerExpired() throws Exception {
+    public void shortBreakTimerExpired() {
         assertTimerExpired(State.BREAKING);
     }
 
     @Test
-    public void longBreakTimerExpired() throws Exception {
+    public void longBreakTimerExpired() {
         assertTimerExpired(State.BREAKING);
     }
 
     @Test
-    public void takeBreaks() throws Exception {
+    public void takeBreaks() {
         for (int i = 1; i < Presenter.MAX_SHORT_BREAKS + 1; i++) {
             presenter.takeABreak();
 
@@ -84,7 +87,7 @@ public class PresenterTest {
     }
 
     @Test
-    public void testSnooze() throws Exception {
+    public void testSnooze() {
         model.setCurrentState(State.WORKING);
         presenter.snooze();
 
@@ -94,7 +97,7 @@ public class PresenterTest {
     }
 
     @Test
-    public void testReset() throws Exception {
+    public void testReset() {
         model.setBreakCount(3);
         presenter.reset();
 
@@ -106,7 +109,7 @@ public class PresenterTest {
     }
 
     @Test
-    public void testAddMinute() throws Exception {
+    public void testAddMinute() {
         when(view.getTime()).thenReturn(2333L);
         presenter.addMinute();
 
@@ -114,18 +117,15 @@ public class PresenterTest {
     }
 
     @Test
-    public void testCannotAddAnotherMinute() throws Exception {
+    public void testCannotAddAnotherMinute() {
         when(view.getTime()).thenReturn(Presenter.FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS);
+        thrown.expect(IllegalStateException.class);
 
-        try {
-            presenter.addMinute();
-            fail();
-        } catch (Exception e) {
-        }
+        presenter.addMinute();
     }
 
     @Test
-    public void testUpperLimitAddMinute() throws Exception {
+    public void testUpperLimitAddMinute() {
         when(view.getTime()).thenReturn(Presenter.FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS);
 
         presenter.addMinute();
@@ -134,18 +134,15 @@ public class PresenterTest {
     }
 
     @Test
-    public void testCannotSubtractAnotherMinute() throws Exception {
+    public void testCannotSubtractAnotherMinute() {
         when(view.getTime()).thenReturn(Presenter.SIXTY_SECONDS - 1000L);
+        thrown.expect(IllegalStateException.class);
 
-        try {
-            presenter.subtractMinute();
-            fail();
-        } catch (Exception e) {
-        }
+        presenter.subtractMinute();
     }
 
     @Test
-    public void testSubtractMinute() throws Exception {
+    public void testSubtractMinute() {
         when(view.getTime()).thenReturn(Presenter.SIXTY_SECONDS);
 
         presenter.subtractMinute();
