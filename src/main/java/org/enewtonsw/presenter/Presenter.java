@@ -11,23 +11,21 @@ import sun.audio.ContinuousAudioDataStream;
 import java.io.IOException;
 
 public class Presenter {
-    public static final int SHORT_BREAK = 5 * 60 * 1000;
-    public static final int SNOOZE_TIME = 5 * 60 * 1000;
-    public static final int WORK_TIME = 25 * 60 * 1000;
-    public static final int LONG_BREAK = 15 * 60 * 1000;
-
-    public static final long FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS = 60 * 60 * 1000L - 1000L;
-    public static final long FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS = 59 * 60 * 1000L - 1000L;
-
-    public static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
-    public static final String WORKING_MESSAGE = "Working...";
-    public static final String TIME_EXPIRED_MESSAGE = "%s Time Expired!";
-    public static final String LONG_BREAK_MESSAGE = "Taking a long break...";
-    public static final int MAX_SHORT_BREAKS = 4;
-    public static final String RESET_MESSAGE = "Reset...";
-    public static final String SNOOZING_MESSAGE = "Snoozing...";
     public static final String ACK_MESSAGE = "Acknowledged";
-    public static final long SIXTY_SECONDS = 60 * 1000L;
+    static final int SHORT_BREAK = 5 * 60 * 1000;
+    static final int SNOOZE_TIME = 5 * 60 * 1000;
+    static final int WORK_TIME = 25 * 60 * 1000;
+    static final int LONG_BREAK = 15 * 60 * 1000;
+    static final long FIFTY_NINE_MINUTES_FIFTY_NINE_SECONDS = 60 * 60 * 1000L - 1000L;
+    static final long FIFTY_EIGHT_MINUTES_FIFTY_NINE_SECONDS = 59 * 60 * 1000L - 1000L;
+    static final String SHORT_BREAK_MESSAGE = "Taking a short break...";
+    static final String WORKING_MESSAGE = "Working...";
+    static final String TIME_EXPIRED_MESSAGE = "%s Time Expired!";
+    static final String LONG_BREAK_MESSAGE = "Taking a long break...";
+    static final int MAX_SHORT_BREAKS = 4;
+    static final String RESET_MESSAGE = "Reset...";
+    static final String SNOOZING_MESSAGE = "Snoozing...";
+    static final long SIXTY_SECONDS = 60 * 1000L;
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
