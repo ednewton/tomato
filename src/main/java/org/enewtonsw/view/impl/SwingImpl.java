@@ -15,11 +15,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class SwingImpl implements View {
-    public static final String TIMER_EXPIRED_MESSAGE = "The timer has expired!";
-    public static final String TIMER_EXPIRED_TITLE = "Timer Expired";
-    public static final String SNOOZE_BUTTON_TEXT = "Snooze for 5 minutes";
-    public static final String SHORT_BREAK_COUNT_IMAGE_DESC = "Short Break Count";
-    public static final int SNOOZE = 1;
+    private static final String TIMER_EXPIRED_MESSAGE = "The timer has expired!";
+    private static final String TIMER_EXPIRED_TITLE = "Timer Expired";
+    private static final String SNOOZE_BUTTON_TEXT = "Snooze for 5 minutes";
+    private static final String SHORT_BREAK_COUNT_IMAGE_DESC = "Short Break Count";
+    private static final int SNOOZE = 1;
     private final JFrame frame;
     private Presenter presenter;
     private JPanel mainPanel;
