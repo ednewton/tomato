@@ -130,6 +130,16 @@ public class SwingImpl implements View {
     }
 
     @Override
+    public void disableShortBreakButton() {
+        shortBreakButton.setEnabled(false);
+    }
+
+    @Override
+    public void enableShortBreakButton() {
+        shortBreakButton.setEnabled(true);
+    }
+
+    @Override
     public void setVersion(String version) {
         versionLabel.setText("v" + version);
     }

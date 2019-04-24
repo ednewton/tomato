@@ -11,6 +11,10 @@ public interface View {
 
     void reset();
 
+    void disableShortBreakButton();
+
+    void enableShortBreakButton();
+
     void setVersion(String version);
 
     long getTime();

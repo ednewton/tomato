@@ -239,6 +239,24 @@ public class PresenterTest {
     }
 
     @Test
+    public void testTakeNextBreakWhenShortBreakCountIsMaxMinusOne() {
+        model.setBreakCount(Presenter.MAX_SHORT_BREAKS - 1);
+        presenter.takeABreak();
+
+        assertEquals(Presenter.MAX_SHORT_BREAKS, model.getBreakCount());
+        verify(view).disableShortBreakButton();
+    }
+
+    @Test
+    public void testEnableShortButtonOnLongBreak() {
+        model.setBreakCount(Presenter.MAX_SHORT_BREAKS);
+        presenter.takeABreak();
+
+        assertEquals(0, model.getBreakCount());
+        verify(view).enableShortBreakButton();
+    }
+
+    @Test
     public void testGetNextStateFirstShortBreak() {
         model.setCurrentState(State.WORKING);
         model.setBreakCount(0);

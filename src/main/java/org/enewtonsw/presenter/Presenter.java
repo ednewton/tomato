@@ -76,12 +76,16 @@ public class Presenter {
         int breakTime = SHORT_BREAK;
         String message = SHORT_BREAK_MESSAGE;
 
-        if (breakCount < MAX_SHORT_BREAKS) {
+        if (breakCount == MAX_SHORT_BREAKS - 1) {
+            breakCount++;
+            view.disableShortBreakButton();
+        } else if (breakCount < MAX_SHORT_BREAKS) {
             breakCount++;
         } else {
             breakCount = 0;
             breakTime = LONG_BREAK;
             message = LONG_BREAK_MESSAGE;
+            view.enableShortBreakButton();
         }
 
         view.setTime(breakTime);
