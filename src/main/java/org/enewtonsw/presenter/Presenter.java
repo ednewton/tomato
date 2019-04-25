@@ -106,6 +106,7 @@ public class Presenter {
         model.setBreakCount(0);
         view.reset();
         view.setMessage(RESET_MESSAGE);
+        view.enableShortBreakButton();
     }
 
     public void stopAudio() {

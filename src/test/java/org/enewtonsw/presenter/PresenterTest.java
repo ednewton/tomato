@@ -106,6 +106,7 @@ public class PresenterTest {
 
         verify(view).reset();
         verify(view).setMessage(Presenter.RESET_MESSAGE);
+        verify(view).enableShortBreakButton();
     }
 
     @Test
