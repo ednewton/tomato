@@ -3,11 +3,8 @@ package org.enewtonsw.presenter;
 import org.enewtonsw.model.Model;
 import org.enewtonsw.model.State;
 import org.enewtonsw.view.View;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
 
 public class Presenter {
@@ -29,8 +26,8 @@ public class Presenter {
     private static final String AUDIO_FILE = "/audio/Ring01.wav";
     private View view;
     private Model model;
-    private AudioStream audioStream;
-    private ContinuousAudioDataStream loop;
+    private Clip clip;
+    private AudioInputStream audioStream;
 
     public Presenter(View view, Model model) {
         this.view = view;
@@ -49,11 +46,11 @@ public class Presenter {
             @Override
             public void run() {
                 try {
-                    audioStream = new AudioStream(getClass().getResourceAsStream(AUDIO_FILE));
-                    AudioData audioData = audioStream.getData();
-                    loop = new ContinuousAudioDataStream(audioData);
-                    AudioPlayer.player.start(loop);
-                } catch (IOException e) {
+                    clip = AudioSystem.getClip();
+                    audioStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(AUDIO_FILE));
+                    clip.open(audioStream);
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                     e.printStackTrace();
                 }
             }
@@ -110,7 +107,9 @@ public class Presenter {
     }
 
     public void stopAudio() {
-        AudioPlayer.player.stop(loop);
+        clip.stop();
+        clip.flush();
+        clip.close();
     }
 
     public void addMinute() {
